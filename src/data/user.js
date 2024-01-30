@@ -46,3 +46,5 @@ class UsersData {
     return user;
   }
 }
+
+module.exports = UsersData;
