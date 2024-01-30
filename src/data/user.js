@@ -3,7 +3,7 @@ const { v4 } = require("uuid");
 class UsersData {
   datos = [
     {
-      id: v4(),
+      id: 1,
       name: "Carlos",
       age: 22,
     },
@@ -37,6 +37,7 @@ class UsersData {
     if (userIndex !== -1) {
       this.datos[userIndex] = { ...this.datos[userIndex], ...dataToUpdate };
     }
+    return this.datos;
   }
   getUsers() {
     return this.datos;
@@ -46,5 +47,4 @@ class UsersData {
     return user;
   }
 }
-
 module.exports = UsersData;
