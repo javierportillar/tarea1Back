@@ -28,23 +28,41 @@ class UsersData {
     return newUser;
   }
   deleteUser(id) {
-    const userToDelete = this.datos.find((user) => user.id === id); // { id: 3, name: 'Nicolás', age: 24 }
-    this.datos = this.datos.filter((user) => user.id !== id); // [1,2,3,4,5] => [1,2,4,5]
+    const userToDelete = this.datos.find((user) => user.id === id);
+    if (userToDelete == undefined) {
+      return null;
+    }
+    this.datos = this.datos.filter((user) => user.id !== id);
     return userToDelete;
   }
   updateUser(id, dataToUpdate) {
-    const userIndex = this.datos.findIndex(user => user.id === id);
-    if (userIndex !== -1) {
-      this.datos[userIndex] = { ...this.datos[userIndex], ...dataToUpdate };
+    const userIndex = this.datos.findIndex((user) => user.id === id);
+    if (userIndex == -1) {
+      return null;
     }
-    return this.datos;
+    this.datos[userIndex] = { ...this.datos[userIndex], ...dataToUpdate };
+    return this.datos[userIndex];
   }
   getUsers() {
     return this.datos;
   }
   getUserById(id) {
-    const user = this.datos.find((user)=>user.id === id);
+    const user = this.datos.find((user) => user.id === id);
+    if (user == undefined) return null;
     return user;
   }
 }
-module.exports = UsersData;
+
+class message {
+  msj(mssg, code) {
+    const message = `
+    {
+      message: ${mssg},
+      code: ${code},
+      errors: []
+    }`;
+    return message;
+  }
+}
+
+module.exports = { UsersData, message };
