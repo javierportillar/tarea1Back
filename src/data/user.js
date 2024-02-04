@@ -3,7 +3,7 @@ const { v4 } = require("uuid");
 class UsersData {
   datos = [
     {
-      id: 1,
+      id: "1",
       name: "Carlos",
       age: 22,
     },
@@ -19,7 +19,7 @@ class UsersData {
     },
   ];
 
-  createUser(id, dataToCreate) {
+  createUser(dataToCreate) {
     const newUser = {
       id: v4(),
       ...dataToCreate,
