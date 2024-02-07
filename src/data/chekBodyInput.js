@@ -48,7 +48,7 @@ class ChekBodyJson {
     });
     this.isNameString(dataBody.name);
     this.isAgeNumber(dataBody.age);
-    this.isIdString(dataId.id);
+    this.isIdString(dataId);
     return this.errors;
   }
 }
