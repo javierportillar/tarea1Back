@@ -10,7 +10,7 @@ const getAllUsers = (req, res, next) => {
 
 const getOneUser = (req, res, next) => {
   const id = req.params.id;
-  const user = usersData.getUserById(Number(id));
+  const user = usersData.getUserById(id);
   if (!user) {
     return res.status(404).send(msjData.msj("No se encontró el usuario", 404));
   }
@@ -18,13 +18,14 @@ const getOneUser = (req, res, next) => {
 };
 
 const deleteUser = (req, res, next) => {
-  const userDeleted = usersData.deleteUser(Number(req.params.id));
-  if (!userDeleted) {
-    return res
-      .status(404)
-      .send(msjData.msj("No se encontró el usuario a eliminar", 404));
+  const id = req.params.id;
+  const userDeleted = usersData.deleteUser(id);
+  if (userDeleted !== null) {
+    return res.status(204).end();
   }
-  return res.status(204);
+  return res
+    .status(404)
+    .send(msjData.msj("No se encontró el usuario a eliminar", 404));
 };
 
 const createNewUser = (req, res, next) => {
@@ -37,12 +38,12 @@ const createNewUser = (req, res, next) => {
 };
 
 const updateUser = (req, res, next) => {
-  const idJSON = req.params;
-  const errors = ChekBodyJson.validateUser(idJSON, req.body);
+  const id = req.params.id;
+  const errors = ChekBodyJson.validateUser(id, req.body);
   if (errors.length > 0) {
     return res.status(400).json(errors);
   }
-  const userUpdated = usersData.updateUser(req.params.id, req.body);
+  const userUpdated = usersData.updateUser(id, req.body);
   if (!userUpdated) {
     return res.status(404).send(msjData.msj("Usuario No encontrado", "400"));
   }
