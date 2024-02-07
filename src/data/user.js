@@ -3,7 +3,7 @@ const { v4 } = require("uuid");
 class UsersData {
   datos = [
     {
-      id: "1",
+      id: v4(),
       name: "Carlos",
       age: 22,
     },
@@ -29,11 +29,11 @@ class UsersData {
   }
   deleteUser(id) {
     const userToDelete = this.datos.find((user) => user.id === id);
-    if (userToDelete == undefined) {
+    if (userToDelete !== undefined) {
+      this.datos = this.datos.filter((user) => user.id !== id);
+    } else {
       return null;
     }
-    this.datos = this.datos.filter((user) => user.id !== id);
-    return userToDelete;
   }
   updateUser(id, dataToUpdate) {
     const userIndex = this.datos.findIndex((user) => user.id === id);
