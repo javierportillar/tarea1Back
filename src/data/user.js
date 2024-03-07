@@ -55,13 +55,13 @@ class UsersData {
 
 class message {
   msj(mssg, code) {
-    const message = `
+    const message = 
     {
-      message: ${mssg},
-      code: ${code},
+      message: mssg,
+      code,
       errors: []
-    }`;
-    return message;
+    };
+    return JSON.stringify(message);
   }
 }
 
